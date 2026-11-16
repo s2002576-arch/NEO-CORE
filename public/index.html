@@ -50,6 +50,70 @@ button:disabled{opacity:.35;cursor:not-allowed}
 .item small{display:block;color:#91abc6;margin-top:4px}
 h2{font-size:18px;color:#75d6ff;margin-top:0}
 #notice{color:#8fe8ff;text-align:center;min-height:20px}
+ /* NEO CORE PREMIUM ANIMATED CAMOS */
+
+.hand {
+  border-radius: 5px;
+  border: 4px solid rgba(220,245,255,.8);
+  background-size: 300% 300%;
+  box-shadow:
+    inset 8px 8px 15px rgba(255,255,255,.35),
+    inset -10px -10px 18px rgba(0,0,0,.55),
+    0 0 25px rgba(50,160,255,.5);
+  animation: premiumFlow 4s ease-in-out infinite;
+}
+
+.hand:before {
+  border: 4px solid rgba(220,245,255,.8);
+  box-shadow:
+    inset 5px 5px 10px rgba(255,255,255,.3),
+    inset -6px -6px 10px rgba(0,0,0,.5);
+}
+
+.hand.gold {
+  background-image:
+    linear-gradient(135deg,#553000,#ffd85a,#fff3bd,#9b6200,#ffe58a,#553000);
+  box-shadow: inset 0 0 20px #fff3a0, 0 0 28px #d99b19;
+}
+
+.hand.platinum {
+  background-image:
+    linear-gradient(135deg,#34495c,#d9efff,#ffffff,#8299ad,#e8f7ff,#34495c);
+  box-shadow: inset 0 0 20px white, 0 0 28px #a9dfff;
+}
+
+.hand.diamond {
+  background-image:
+    repeating-linear-gradient(45deg,transparent 0 18px,rgba(255,255,255,.4) 19px 21px),
+    linear-gradient(135deg,#003d8b,#42dfff,#efffff,#1475d5,#003d8b);
+  box-shadow: inset 0 0 20px #d5ffff, 0 0 30px #36cfff;
+}
+
+.hand.spine {
+  background-image:
+    repeating-linear-gradient(135deg,transparent 0 15px,rgba(255,0,255,.35) 16px 19px),
+    linear-gradient(135deg,#10001f,#4d0875,#d000ff,#210038,#7800a8);
+  box-shadow: inset 0 0 20px #c000ff, 0 0 30px #a000ff;
+}
+
+.hand.matter {
+  background-image:
+    radial-gradient(ellipse at 70% 30%,#8e35c9,transparent 40%),
+    linear-gradient(135deg,#020008,#171020,#570078,#08000d);
+  box-shadow: inset 0 0 22px #8d28bd, 0 0 32px #6000a0;
+}
+
+.hand.singularity {
+  background-image:
+    conic-gradient(from 0deg,red,orange,yellow,lime,cyan,blue,violet,red);
+  box-shadow: inset 0 0 25px white, 0 0 35px #bd62ff;
+}
+
+@keyframes premiumFlow {
+  0% { background-position: 0% 50%; filter: brightness(.9); }
+  50% { background-position: 100% 50%; filter: brightness(1.35); }
+  100% { background-position: 0% 50%; filter: brightness(.9); }
+}
 </style>
 </head>
 <body>
