@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEO CORE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050b18;color:#eaf5ff;font-family:Arial,sans-serif}
+header{text-align:center;padding:22px 10px;background:#09172c;border-bottom:1px solid #174b83}
+h1{font-size:36px;letter-spacing:5px;margin:0;color:#54caff;text-shadow:0 0 20px #168bff}
+.sub{color:#799bbd;font-size:11px;letter-spacing:3px}
+main{max-width:850px;margin:auto;padding:16px}
+.panel{background:linear-gradient(145deg,#10223b,#091426);border:1px solid #24517c;border-radius:14px;padding:16px;margin-bottom:15px;box-shadow:0 0 20px #001a35}
+.money{text-align:center;font-size:35px;font-weight:bold;color:#63dfff}
+.small{text-align:center;color:#86a7c8;font-size:13px}
+.core{text-align:center;padding:20px}
+.hand{width:130px;height:130px;margin:15px auto;background:linear-gradient(135deg,#36bfff,#0755a5);border:5px solid #9ceaff;box-shadow:0 0 30px #168bff;border-radius:8px;cursor:pointer;position:relative;transition:.08s}
+.hand:before{content:"";position:absolute;width:43px;height:78px;left:38px;top:-65px;background:inherit;border:4px solid #9ceaff;border-radius:5px}
+.hand:active{transform:scale(.88) rotate(-5deg)}
+.hand.gold{background:linear-gradient(120deg,#8a5300,#fff0a0,#a96a00,#fff2ad);background-size:200% 200%;animation:shine 2s infinite}
+.hand.platinum{background:linear-gradient(120deg,#687b91,#fff,#899cad,#fff);background-size:200% 200%;animation:shine 2s infinite}
+.hand.diamond{background:linear-gradient(120deg,#0878d5,#c9ffff,#1354bc);background-size:200% 200%;animation:shine 1.5s infinite}
+.hand.spine{background:linear-gradient(120deg,#220044,#b000ff,#300060);background-size:200% 200%;animation:shine 1.3s infinite}
+.hand.matter{background:linear-gradient(120deg,#08000d,#6b168d,#09000c);background-size:200% 200%;animation:shine 2s infinite}
+.hand.singularity{background:linear-gradient(120deg,red,orange,yellow,lime,cyan,blue,violet);background-size:300% 300%;animation:shine 2s infinite}
+@keyframes shine{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+button{background:#123d68;color:white;border:1px solid #368aca;padding:11px 14px;border-radius:8px;cursor:pointer;font-weight:bold}
+button:hover{background:#1763a0}
+button:disabled{opacity:.35;cursor:not-allowed}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{flex:1}
+.rankhead{display:flex;align-items:center;gap:15px}
+.emblem{width:75px;height:80px;flex-shrink:0;display:grid;place-items:center;clip-path:polygon(50% 0,95% 20%,85% 75%,50% 100%,15% 75%,5% 20%);background:var(--rank);color:white;font-size:32px;text-shadow:0 2px 5px #000;border:0}
+.bronze{--rank:linear-gradient(135deg,#653817,#e2a36b)}
+.silver{--rank:linear-gradient(135deg,#65768c,#fff)}
+.goldrank{--rank:linear-gradient(135deg,#865400,#ffe36a)}
+.platinum{--rank:linear-gradient(135deg,#607f9c,#e9ffff)}
+.diamond{--rank:linear-gradient(135deg,#0053b9,#7cecff)}
+.crimson{--rank:linear-gradient(135deg,#680014,#ff294d)}
+.rainbow{--rank:linear-gradient(135deg,red,orange,lime,cyan,blue,violet)}
+.veteran{--rank:linear-gradient(135deg,#164f45,#d7c28b)}
+.master{--rank:linear-gradient(135deg,#360071,#e0aaff)}
+.legend{--rank:linear-gradient(135deg,#ffb800,#ff38df,#28eaff)}
+.bar{height:13px;background:#07101e;border:1px solid #345879;border-radius:20px;overflow:hidden;margin:12px 0}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#087bff,#54eaff);transition:width .3s}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #23405c}
+.item:last-child{border:0}
+.item small{display:block;color:#91abc6;margin-top:4px}
+h2{font-size:18px;color:#75d6ff;margin-top:0}
+#notice{color:#8fe8ff;text-align:center;min-height:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>NEO CORE</h1>
+<div class="sub">EVOLVE BEYOND LIMITS</div>
+</header>
+<main>
+<section class="panel">
+<div class="small">YOUR CREDITS</div>
+<div class="money" id="money">0 円</div>
+<div class="small" id="power">1 円 / TAP</div>
+<div class="core">
+<div class="small">TAP TO EVOLVE</div>
+<div class="hand" id="hand" onclick="tap()"></div>
+<div><button onclick="tap()">COREをタップ！</button></div>
+</div>
+<div id="notice"></div>
+</section>
+
+<section class="panel">
+<h2>🏆 RANK SYSTEM</h2>
+<div class="rankhead">
+<div class="emblem bronze" id="emblem">★</div>
+<div style="flex:1">
+<div class="small" style="text-align:left">CURRENT RANK</div>
+<strong id="rankname">ブロンズ</strong>
+<div class="small" id="rankpoints" style="text-align:left">0 RP</div>
+</div>
+</div>
+<div class="bar"><div class="fill" id="rankbar"></div></div>
+<div class="row small"><span id="current">0</span><span id="next">次のランクまで 200 RP</span></div>
+<div class="small" style="margin-top:10px">RPは累計獲得クレジットと連動</div>
+</section>
+
+<div class="tabs">
+<button onclick="show('upgrades')">強化ショップ</button>
+<button onclick="show('camos')">迷彩ショップ</button>
+<button onclick="show('ranks')">ランク一覧</button>
+</div>
+<section class="panel" id="shop">
+<h2>⚡ TAP UPGRADES</h2>
+<div id="upgrades"></div>
+</section>
+</main>
+<script>
+let money=0, total=0, power=1;
+let bought=[];
+let owned=[], equipped="";
+const upgrades=[
+{price:100,power:3},
+{price:500,power:10},
+{price:1000,power:100},
+{price:10000,power:500}
+];
+const camos=[
+{name:"GOLD",price:1000,cls:"gold"},
+{name:"PLATINUM",price:2000,cls:"platinum"},
+{name:"DIAMOND",price:5000,cls:"diamond"},
+{name:"DARK SPINE",price:20000,cls:"spine"},
+{name:"DARK MATTER",price:50000,cls:"matter"},
+{name:"SINGULARITY",price:100000,cls:"singularity"}
+];
+const ranks=[
+{name:"ブロンズ",need:0,cls:"bronze"},
+{name:"シルバー",need:200,cls:"silver"},
+{name:"ゴールド",need:1000,cls:"goldrank"},
+{name:"プラチナ",need:3000,cls:"platinum"},
+{name:"ダイアモンド",need:5000,cls:"diamond"},
+{name:"クリムゾン",need:10000,cls:"crimson"},
+{name:"レインボー",need:20000,cls:"rainbow"},
+{name:"ベテラン",need:50000,cls:"veteran"},
+{name:"マスター",need:100000,cls:"master"},
+{name:"レジェンド",need:500000,cls:"legend"}
+];
+function tap(){
+ money+=power;total+=power;
+ update();
+}
+function update(){
+ document.getElementById("money").textContent=money.toLocaleString()+" 円";
+ document.getElementById("power").textContent=power.toLocaleString()+" 円 / TAP";
+ let rp=total;
+ let idx=0;
+ for(let i=0;i<ranks.length;i++)if(rp>=ranks[i].need)idx=i;
+ let r=ranks[idx],next=ranks[idx+1];
+ document.getElementById("rankname").textContent=r.name;
+ document.getElementById("rankpoints").textContent=rp.toLocaleString()+" RP";
+ let emblem=document.getElementById("emblem");
+ emblem.className="emblem "+r.cls;
+ document.getElementById("current").textContent=rp.toLocaleString()+" RP";
+ if(next){
+ let pct=Math.min(100,(rp-r.need)/(next.need-r.need)*100);
+ document.getElementById("rankbar").style.width=pct+"%";
+ document.getElementById("next").textContent="次のランク："+next.name+" まで "+Math.max(0,next.need-rp).toLocaleString()+" RP";
+ }else{
+ let pct=Math.min(100,rp/1000000*100);
+ document.getElementById("rankbar").style.width=pct+"%";
+ document.getElementById("next").textContent="最高ランク！ 1,000,000 RPで完全制覇";
+ }
+ renderUpgrades();
+}
+function renderUpgrades(){
+ document.getElementById("upgrades").innerHTML=upgrades.map((u,i)=>`
+ <div class="item"><div><b>タップ強化 ${i+1}</b><small>${u.price.toLocaleString()}円 → ${u.power}円 / TAP</small></div>
+ <button ${bought.includes(i)||money<u.price?"disabled":""} onclick="buyUpgrade(${i})">${bought.includes(i)?"購入済み":"購入"}</button></div>`).join("");
+}
+function buyUpgrade(i){
+ let u=upgrades[i];if(money<u.price||bought.includes(i))return;
+ money-=u.price;power=u.power;bought.push(i);
+ document.getElementById("notice").textContent="タップ強化を購入した！";
+ update();
+}
+function show(type){
+ let el=document.getElementById("shop");
+ if(type==="upgrades"){
+ el.innerHTML='<h2>⚡ TAP UPGRADES</h2><div id="upgrades"></div>';
+ renderUpgrades();
+ }
+ if(type==="camos"){
+ el.innerHTML='<h2>🎨 CAMO SHOP</h2>'+camos.map((c,i)=>`
+ <div class="item"><div><b>${c.name}</b><small>${c.price.toLocaleString()}円</small></div>
+ <button onclick="camoAction(${i})">${owned.includes(i)?(equipped===c.cls?"装備中":"装備"):(money>=c.price?"購入":"購入不可")}</button></div>`).join("");
+ }
+ if(type==="ranks"){
+ el.innerHTML='<h2>🏆 RANK LIST</h2>'+ranks.map(r=>`
+ <div class="item"><div class="emblem ${r.cls}" style="width:48px;height:52px;font-size:20px">★</div><div style="flex:1"><b>${r.name}</b><small>${r.need.toLocaleString()} RP</small></div></div>`).join("")+
+ '<div class="small">1,000,000 RP：レジェンド完全制覇</div>';
+ }
+}
+function camoAction(i){
+ let c=camos[i];
+ if(!owned.includes(i)){
+ if(money<c.price)return;
+ money-=c.price;owned.push(i);
+ }
+ equipped=c.cls;
+ document.getElementById("hand").className="hand "+equipped;
+ document.getElementById("notice").textContent=c.name+" を装備した！";
+ show("camos");update();
+}
+update();
+</script>
+</body>
+</html>
