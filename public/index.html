@@ -5,114 +5,103 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NEO CORE</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#050b18;color:#eaf5ff;font-family:Arial,sans-serif}
-header{text-align:center;padding:22px 10px;background:#09172c;border-bottom:1px solid #174b83}
-h1{font-size:36px;letter-spacing:5px;margin:0;color:#54caff;text-shadow:0 0 20px #168bff}
-.sub{color:#799bbd;font-size:11px;letter-spacing:3px}
-main{max-width:850px;margin:auto;padding:16px}
-.panel{background:linear-gradient(145deg,#10223b,#091426);border:1px solid #24517c;border-radius:14px;padding:16px;margin-bottom:15px;box-shadow:0 0 20px #001a35}
-.money{text-align:center;font-size:35px;font-weight:bold;color:#63dfff}
-.small{text-align:center;color:#86a7c8;font-size:13px}
-.core{text-align:center;padding:20px}
-.hand{width:130px;height:130px;margin:15px auto;background:linear-gradient(135deg,#36bfff,#0755a5);border:5px solid #9ceaff;box-shadow:0 0 30px #168bff;border-radius:8px;cursor:pointer;position:relative;transition:.08s}
-.hand:before{content:"";position:absolute;width:43px;height:78px;left:38px;top:-65px;background:inherit;border:4px solid #9ceaff;border-radius:5px}
-.hand:active{transform:scale(.88) rotate(-5deg)}
-.hand.gold{background:linear-gradient(120deg,#8a5300,#fff0a0,#a96a00,#fff2ad);background-size:200% 200%;animation:shine 2s infinite}
-.hand.platinum{background:linear-gradient(120deg,#687b91,#fff,#899cad,#fff);background-size:200% 200%;animation:shine 2s infinite}
-.hand.diamond{background:linear-gradient(120deg,#0878d5,#c9ffff,#1354bc);background-size:200% 200%;animation:shine 1.5s infinite}
-.hand.spine{background:linear-gradient(120deg,#220044,#b000ff,#300060);background-size:200% 200%;animation:shine 1.3s infinite}
-.hand.matter{background:linear-gradient(120deg,#08000d,#6b168d,#09000c);background-size:200% 200%;animation:shine 2s infinite}
-.hand.singularity{background:linear-gradient(120deg,red,orange,yellow,lime,cyan,blue,violet);background-size:300% 300%;animation:shine 2s infinite}
-@keyframes shine{0%{background-position:0% 50%}100%{background-position:100% 50%}}
-button{background:#123d68;color:white;border:1px solid #368aca;padding:11px 14px;border-radius:8px;cursor:pointer;font-weight:bold}
-button:hover{background:#1763a0}
-button:disabled{opacity:.35;cursor:not-allowed}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.tabs button{flex:1}
-.rankhead{display:flex;align-items:center;gap:15px}
-.emblem{width:75px;height:80px;flex-shrink:0;display:grid;place-items:center;clip-path:polygon(50% 0,95% 20%,85% 75%,50% 100%,15% 75%,5% 20%);background:var(--rank);color:white;font-size:32px;text-shadow:0 2px 5px #000;border:0}
-.bronze{--rank:linear-gradient(135deg,#653817,#e2a36b)}
-.silver{--rank:linear-gradient(135deg,#65768c,#fff)}
-.goldrank{--rank:linear-gradient(135deg,#865400,#ffe36a)}
-.platinum{--rank:linear-gradient(135deg,#607f9c,#e9ffff)}
-.diamond{--rank:linear-gradient(135deg,#0053b9,#7cecff)}
-.crimson{--rank:linear-gradient(135deg,#680014,#ff294d)}
-.rainbow{--rank:linear-gradient(135deg,red,orange,lime,cyan,blue,violet)}
-.veteran{--rank:linear-gradient(135deg,#164f45,#d7c28b)}
-.master{--rank:linear-gradient(135deg,#360071,#e0aaff)}
-.legend{--rank:linear-gradient(135deg,#ffb800,#ff38df,#28eaff)}
-.bar{height:13px;background:#07101e;border:1px solid #345879;border-radius:20px;overflow:hidden;margin:12px 0}
-.fill{height:100%;width:0;background:linear-gradient(90deg,#087bff,#54eaff);transition:width .3s}
-.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #23405c}
-.item:last-child{border:0}
-.item small{display:block;color:#91abc6;margin-top:4px}
-h2{font-size:18px;color:#75d6ff;margin-top:0}
-#notice{color:#8fe8ff;text-align:center;min-height:20px}
- /* NEO CORE PREMIUM ANIMATED CAMOS */
-
-.hand {
-  border-radius: 5px;
-  border: 4px solid rgba(220,245,255,.8);
-  background-size: 300% 300%;
-  box-shadow:
-    inset 8px 8px 15px rgba(255,255,255,.35),
-    inset -10px -10px 18px rgba(0,0,0,.55),
-    0 0 25px rgba(50,160,255,.5);
-  animation: premiumFlow 4s ease-in-out infinite;
+#callingCardSection {
+  background: linear-gradient(145deg,#080b18,#17152b);
+  border: 1px solid #555477;
+  box-shadow: 0 0 25px #17103c;
 }
 
-.hand:before {
-  border: 4px solid rgba(220,245,255,.8);
-  box-shadow:
-    inset 5px 5px 10px rgba(255,255,255,.3),
-    inset -6px -6px 10px rgba(0,0,0,.5);
+.calling-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 145px;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 3px;
+  border: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-shadow: 0 2px 5px black;
 }
 
-.hand.gold {
-  background-image:
-    linear-gradient(135deg,#553000,#ffd85a,#fff3bd,#9b6200,#ffe58a,#553000);
-  box-shadow: inset 0 0 20px #fff3a0, 0 0 28px #d99b19;
+.calling-card h3 {
+  font-size: 25px;
+  margin: 8px;
+  position: relative;
+  z-index: 1;
 }
 
-.hand.platinum {
-  background-image:
-    linear-gradient(135deg,#34495c,#d9efff,#ffffff,#8299ad,#e8f7ff,#34495c);
-  box-shadow: inset 0 0 20px white, 0 0 28px #a9dfff;
+.calling-card p {
+  margin: 5px;
+  position: relative;
+  z-index: 1;
 }
 
-.hand.diamond {
-  background-image:
-    repeating-linear-gradient(45deg,transparent 0 18px,rgba(255,255,255,.4) 19px 21px),
-    linear-gradient(135deg,#003d8b,#42dfff,#efffff,#1475d5,#003d8b);
-  box-shadow: inset 0 0 20px #d5ffff, 0 0 30px #36cfff;
+.calling-card::before {
+  content: "✦";
+  position: absolute;
+  font-size: 100px;
+  right: 8px;
+  top: 10px;
+  opacity: .2;
 }
 
-.hand.spine {
-  background-image:
-    repeating-linear-gradient(135deg,transparent 0 15px,rgba(255,0,255,.35) 16px 19px),
-    linear-gradient(135deg,#10001f,#4d0875,#d000ff,#210038,#7800a8);
-  box-shadow: inset 0 0 20px #c000ff, 0 0 30px #a000ff;
+.calling-card.owned {
+  box-shadow: 0 0 18px #ffffff55;
 }
 
-.hand.matter {
-  background-image:
-    radial-gradient(ellipse at 70% 30%,#8e35c9,transparent 40%),
-    linear-gradient(135deg,#020008,#171020,#570078,#08000d);
-  box-shadow: inset 0 0 22px #8d28bd, 0 0 32px #6000a0;
+.calling-card.locked {
+  filter: grayscale(1);
+  opacity: .35;
 }
 
-.hand.singularity {
-  background-image:
-    conic-gradient(from 0deg,red,orange,yellow,lime,cyan,blue,violet,red);
-  box-shadow: inset 0 0 25px white, 0 0 35px #bd62ff;
+.calling-card.bronze {
+  background: linear-gradient(120deg,#351b0b,#c17b32,#281307);
+  border-color: #d99a58;
 }
 
-@keyframes premiumFlow {
-  0% { background-position: 0% 50%; filter: brightness(.9); }
-  50% { background-position: 100% 50%; filter: brightness(1.35); }
-  100% { background-position: 0% 50%; filter: brightness(.9); }
+.calling-card.silver {
+  background: linear-gradient(120deg,#253449,#c5d9ed,#26334b);
+  border-color: #d9eaff;
+}
+
+.calling-card.gold {
+  background: linear-gradient(120deg,#583600,#ffd447,#754400);
+  border-color: #ffe58a;
+}
+
+.calling-card.platinum {
+  background: linear-gradient(120deg,#092c50,#38b9ed,#182b59);
+  border-color: #a9edff;
+}
+
+.calling-card.legendary {
+  background: linear-gradient(135deg,#17002f,#6c16bb,#17002f);
+  border: 2px solid #e3b5ff;
+  box-shadow: 0 0 20px #a000ff;
+  animation: legendaryGlow 1.2s infinite alternate;
+}
+
+.calling-card.legendary::before {
+  content: "⚡";
+  font-size: 110px;
+  color: #f4d6ff;
+  opacity: .65;
+  animation: lightningFlash .7s infinite alternate;
+}
+
+@keyframes legendaryGlow {
+  from { box-shadow: 0 0 10px #8b00ff; }
+  to { box-shadow: 0 0 35px #d000ff,0 0 55px #7100ff; }
+}
+
+@keyframes lightningFlash {
+  from { opacity: .25; }
+  to { opacity: .9; }
 }
 </style>
 </head>
@@ -321,7 +310,7 @@ function renderCallingCards() {
     const owned = unlockedCards.includes(card.name);
     const item = document.createElement("div");
 
-    item.className = "calling-card " +
+   item.className = "calling-card " + card.name.toLowerCase() + (owned ? " owned" : " locked");
       (owned ? "owned " : "locked ") +
       (card.name === "LEGENDARY" ? "legendary" : "");
 
