@@ -191,7 +191,29 @@ const ranks=[
 ];
 function tap(){
  money+=power;total+=power;
+ checkCallingCards();
  update();
+}
+ const callingCards = [
+  { name: "BRONZE", credits: 100 },
+  { name: "SILVER", credits: 1000 },
+  { name: "GOLD", credits: 10000 },
+  { name: "PLATINUM", credits: 100000 },
+  { name: "LEGENDARY", credits: 1000000 }
+];
+
+let unlockedCards = JSON.parse(localStorage.getItem("neoCallingCards") || "[]");
+
+function checkCallingCards() {
+  callingCards.forEach(card => {
+    if (total >= card.credits && !unlockedCards.includes(card.name)) {
+      unlockedCards.push(card.name);
+      localStorage.setItem("neoCallingCards", JSON.stringify(unlockedCards));
+      alert("CALLING CARD UNLOCKED: " + card.name);
+    }
+  });
+
+  renderCallingCards();
 }
 function update(){
  document.getElementById("money").textContent=money.toLocaleString()+" 円";
@@ -256,6 +278,63 @@ function camoAction(i){
  show("camos");update();
 }
 update();
+</script>
+ <section id="callingCardSection" style="margin:30px auto;max-width:900px;padding:20px;background:#101522;border:1px solid #39445c;border-radius:16px;color:white;">
+  <h2 style="text-align:center;letter-spacing:3px;">CALLING CARDS</h2>
+  <div id="callingCardList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;"></div>
+</section>
+
+<style>
+.calling-card {
+  padding:20px;
+  min-height:110px;
+  border-radius:12px;
+  text-align:center;
+  border:2px solid #777;
+  background:linear-gradient(135deg,#252525,#080808);
+  color:white;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+.calling-card.owned {box-shadow:0 0 15px #888;}
+.calling-card.locked {opacity:.35;filter:grayscale(1);}
+.calling-card.legendary {
+  border-color:#b66aff;
+  background:linear-gradient(135deg,#210044,#090018,#4b1680);
+  box-shadow:0 0 20px #a000ff;
+  animation:lightning 1.5s infinite alternate;
+}
+@keyframes lightning {
+  from {box-shadow:0 0 8px #8b00ff;}
+  to {box-shadow:0 0 28px #d8aaff,0 0 45px #7900ff;}
+}
+</style>
+
+<script>
+function renderCallingCards() {
+  const list = document.getElementById("callingCardList");
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  callingCards.forEach(card => {
+    const owned = unlockedCards.includes(card.name);
+    const item = document.createElement("div");
+
+    item.className = "calling-card " +
+      (owned ? "owned " : "locked ") +
+      (card.name === "LEGENDARY" ? "legendary" : "");
+
+    item.innerHTML =
+      "<h3>" + (owned ? card.name : "LOCKED") + "</h3>" +
+      "<p>" + card.credits.toLocaleString() + " CREDIT</p>" +
+      "<p>" + (owned ? "UNLOCKED" : "NOT UNLOCKED") + "</p>";
+
+    list.appendChild(item);
+  });
+}
+
+renderCallingCards();
 </script>
 </body>
 </html>
