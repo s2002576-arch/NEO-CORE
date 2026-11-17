@@ -186,8 +186,8 @@ const ranks=[
 {name:"クリムゾン",need:20000,cls:"crimson"},
 {name:"レインボー",need:50000,cls:"rainbow"},
 {name:"ベテラン",need:100000,cls:"veteran"},
-{name:"マスター",need:500000,cls:"master"},
-{name:"レジェンド",need:1000000,cls:"legend"}
+{name:"マスター",need:1000000,cls:"master"},
+{name:"レジェンド",need:10000000,cls:"legend"}
 ];
 function tap(){
  money+=power;total+=power;
@@ -212,7 +212,7 @@ function update(){
  }else{
  let pct=Math.min(100,rp/1000000*100);
  document.getElementById("rankbar").style.width=pct+"%";
- document.getElementById("next").textContent="最高ランク！ 1,000,000 RPで完全制覇";
+ document.getElementById("next").textContent="最高ランク！ 10,000,000 RPで完全制覇";
  }
  renderUpgrades();
 }
