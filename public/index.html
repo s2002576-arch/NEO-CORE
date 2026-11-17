@@ -32,94 +32,8 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
-#callingCardSection {
-  background: linear-gradient(145deg,#080b18,#17152b);
-  border: 1px solid #555477;
-  box-shadow: 0 0 25px #17103c;
-}
 
-.calling-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 145px;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  color: white;
-  font-weight: 900;
-  letter-spacing: 3px;
-  border: 2px solid white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-shadow: 0 2px 5px black;
-}
 
-.calling-card h3 {
-  font-size: 25px;
-  margin: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.calling-card p {
-  margin: 5px;
-  position: relative;
-  z-index: 1;
-}
-
-.calling-card::before {
-  content: "✦";
-  position: absolute;
-  font-size: 100px;
-  right: 8px;
-  top: 10px;
-  opacity: .2;
-}
-
-.calling-card.owned {
-  box-shadow: 0 0 18px #ffffff55;
-}
-
-.calling-card.locked {
-  filter: grayscale(1);
-  opacity: .35;
-}
-
-.calling-card.bronze {
-  background: linear-gradient(120deg,#351b0b,#c17b32,#281307);
-  border-color: #d99a58;
-}
-
-.calling-card.silver {
-  background: linear-gradient(120deg,#253449,#c5d9ed,#26334b);
-  border-color: #d9eaff;
-}
-
-.calling-card.gold {
-  background: linear-gradient(120deg,#583600,#ffd447,#754400);
-  border-color: #ffe58a;
-}
-
-.calling-card.platinum {
-  background: linear-gradient(120deg,#092c50,#38b9ed,#182b59);
-  border-color: #a9edff;
-}
-
-.calling-card.legendary {
-  background: linear-gradient(135deg,#17002f,#6c16bb,#17002f);
-  border: 2px solid #e3b5ff;
-  box-shadow: 0 0 20px #a000ff;
-  animation: legendaryGlow 1.2s infinite alternate;
-}
-
-.calling-card.legendary::before {
-  content: "⚡";
-  font-size: 110px;
-  color: #f4d6ff;
-  opacity: .65;
-  animation: lightningFlash .7s infinite alternate;
-}
 
 @keyframes legendaryGlow {
   from { box-shadow: 0 0 10px #8b00ff; }
@@ -205,32 +119,7 @@ const ranks=[
 {name:"マスター",need:1000000,cls:"master"},
 {name:"レジェンド",need:10000000,cls:"legend"}
 ];
-function tap(){
- money+=power;total+=power;
- checkCallingCards();
- update();
-}
- const callingCards = [
-  { name: "BRONZE", credits: 100 },
-  { name: "SILVER", credits: 1000 },
-  { name: "GOLD", credits: 10000 },
-  { name: "PLATINUM", credits: 100000 },
-  { name: "LEGENDARY", credits: 1000000 }
-];
 
-let unlockedCards = JSON.parse(localStorage.getItem("neoCallingCards") || "[]");
-
-function checkCallingCards() {
-  callingCards.forEach(card => {
-    if (total >= card.credits && !unlockedCards.includes(card.name)) {
-      unlockedCards.push(card.name);
-      localStorage.setItem("neoCallingCards", JSON.stringify(unlockedCards));
-      alert("CALLING CARD UNLOCKED: " + card.name);
-    }
-  });
-
-  renderCallingCards();
-}
 function update(){
  document.getElementById("money").textContent=money.toLocaleString()+" 円";
  document.getElementById("power").textContent=power.toLocaleString()+" 円 / TAP";
@@ -294,63 +183,6 @@ function camoAction(i){
  show("camos");update();
 }
 update();
-</script>
- <section id="callingCardSection" style="margin:30px auto;max-width:900px;padding:20px;background:#101522;border:1px solid #39445c;border-radius:16px;color:white;">
-  <h2 style="text-align:center;letter-spacing:3px;">CALLING CARDS</h2>
-  <div id="callingCardList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;"></div>
-</section>
-
-<style>
-.calling-card {
-  padding:20px;
-  min-height:110px;
-  border-radius:12px;
-  text-align:center;
-  border:2px solid #777;
-  background:linear-gradient(135deg,#252525,#080808);
-  color:white;
-  font-weight:bold;
-  letter-spacing:2px;
-}
-.calling-card.owned {box-shadow:0 0 15px #888;}
-.calling-card.locked {opacity:.35;filter:grayscale(1);}
-.calling-card.legendary {
-  border-color:#b66aff;
-  background:linear-gradient(135deg,#210044,#090018,#4b1680);
-  box-shadow:0 0 20px #a000ff;
-  animation:lightning 1.5s infinite alternate;
-}
-@keyframes lightning {
-  from {box-shadow:0 0 8px #8b00ff;}
-  to {box-shadow:0 0 28px #d8aaff,0 0 45px #7900ff;}
-}
-</style>
-
-<script>
-function renderCallingCards() {
-  const list = document.getElementById("callingCardList");
-  if (!list) return;
-
-  list.innerHTML = "";
-
-  callingCards.forEach(card => {
-    const owned = unlockedCards.includes(card.name);
-    const item = document.createElement("div");
-
-   item.className = "calling-card " + card.name.toLowerCase() + (owned ? " owned" : " locked");
-      (owned ? "owned " : "locked ") +
-      (card.name === "LEGENDARY" ? "legendary" : "");
-
-    item.innerHTML =
-      "<h3>" + (owned ? card.name : "LOCKED") + "</h3>" +
-      "<p>" + card.credits.toLocaleString() + " CREDIT</p>" +
-      "<p>" + (owned ? "UNLOCKED" : "NOT UNLOCKED") + "</p>";
-
-    list.appendChild(item);
-  });
-}
-
-renderCallingCards();
 </script>
 </body>
 </html>
